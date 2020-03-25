@@ -111,16 +111,8 @@ def some_loop_exercise() -> list:
     """
     Use loop to create list that contain int values from 0 to 12 except 6 and 7
     """
-    # list = []
-    # list1 = [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12]
-    # for n in list1:
-    #     list.append(n)
-    # return list
-    list = []
-    for i in range(13):
-        if i != 6 and i != 7:
-           list.append(i)
-    return list
+    excluding = [6, 7]
+    return [i for i in range(13) if i not in excluding]
 
 
 def remove_from_list_all_negative_numbers(data: List[int]) -> list:
@@ -154,10 +146,11 @@ def simple_sort(data: List[int]) -> List[list]:
         >>> [1, 2, 2, 3, 6, 7, 9]
     """
     check = True
+    data1 = data[:]
     while check:
         check = False
-        for i in range(len(data) - 1):
-            if data[i] > data[i + 1]:
-                data[i], data[i + 1] = data[i + 1], data[i]
+        for i in range(len(data1) - 1):
+            if data1[i] > data1[i + 1]:
+                data1[i], data1[i + 1] = data1[i + 1], data1[i]
                 check = True
-    return data
+    return data1
