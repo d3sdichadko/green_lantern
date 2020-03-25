@@ -57,7 +57,7 @@ class Cat:
             self._increase_saturation_level(2)
 
     def _reduce_saturation_level(self, value):
-        if saturation_level < 0:
+        if self.saturation_level < 0:
             return 0
 
     def _increase_saturation_level(self, value):
@@ -89,6 +89,7 @@ class Cat:
       if it runs more than 200(not including) than _reduce_saturation_level with value 50
 
       return text like this: f"Your cat ran {ran_km} kilometers" """
+        ran_km = self.average_speed * hours
         if self.average_speed <= 25:
             self._reduce_saturation_level(2)
         if self.average_speed > 25 and self.average_speed <= 50:
@@ -171,7 +172,8 @@ class Wall:
         return self.width * self.height
 
     def number_of_rolls_of_wallpaper(self, roll_width_m, roll_length_m):
-        pass
+        #pass
+        return self.width * self.height / roll_width_m * roll_length_m
 
 
 
@@ -186,11 +188,21 @@ class Roof:
 
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, roof_width, roof_height, roof_type):
+        #pass
+        self.roof_width = roof_width
+        self.roof_height = roof_height
+        self.roof_type = roof_type
 
     def roof_square(self):
-        pass
+        #pass
+        if self.roof_type == 'gable':
+            return self.roof_width * self.roof_height * 2
+        if self.roof_type == 'single-pinch':
+            return self.roof_width * self.roof_height
+        else:
+            raise ValueError("Sorry there is only two types of roofs")
+        #round
 
 
 class Window:
@@ -201,11 +213,14 @@ class Window:
 
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, window_width, window_height):
+        #pass
+        self.window_width = window_width
+        self.window_height = window_height
 
     def window_square(self):
-        pass
+        #pass
+        return self.window_width * self.window_height
 
 
 class Door:
@@ -215,7 +230,7 @@ class Door:
 
      * Implement method door_square which return result of simple square formula of rectangle
 
-     * Implement method door_square which receives material value as a parameter
+     * Implement method door_price which receives material value as a parameter
        if material eq wood return door_square multiplied on wood_price
        if material eq metal return door_square multiplied on metal_price
        if material value is another one (not metal or wood) raise ValueError "Sorry we don't have such material"
@@ -226,20 +241,33 @@ class Door:
 
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, door_width, door_height, wood_price, metal_price):
+        #pass
+        self.door_width = door_width
+        self.door_height = door_height
+        self.wood_price = wood_price
+        self.metal_price = metal_price
 
     def door_square(self):
-        pass
+        return self.door_width * self.door_height
 
-    def door_price(self):
-        pass
+    def door_price(self, material):
+        self.material = material
+        if self.material == 'wood':
+            return self.door_width * self.door_height * self.wood_price
+        if self.material == 'metal':
+            return self.door_width * self.door_height * self.metal_price
+        else:
+            raise ValueError("Sorry we don't have such material")
 
-    def update_wood_price(self):
-        pass
 
-    def update_metal_price(self):
-        pass
+    def update_wood_price(self, new_wood_price):
+        #pass
+        self.wood_price = new_wood_price
+
+    def update_metal_price(self, new_metal_price):
+        #pass
+        self.metal_price = new_metal_price
 
 
 class House:
@@ -300,11 +328,19 @@ class House:
 
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, __walls, __windows, __roof, __door):
+        #pass
+        self.__walls = []
+        self.__windows = []
+        self.__roof = None
+        self.__door = None
+
 
     def create_wall(self):
-        pass
+        #pass
+        new_wall = Wall(width, height)
+        self.__walls[i] += 1
+
 
     def create_roof(self):
         pass
