@@ -1,11 +1,12 @@
 from itertools import count
-from store_app import NoSuchUserError
+from store_app import NoSuchUserError, NoSuchGoodError, NoSuchStoreError
 
 
 class FakeStorage:
     def __init__(self):
         self._users = FakeUsers()
         self._goods = FakeGoods()
+        self._store = FakeStores()
 
     @property
     def users(self):
@@ -15,6 +16,10 @@ class FakeStorage:
     def goods(self):
         return self._goods
 
+    @property
+    def store(self):
+        return self._store
+
 
 class FakeUsers:
     def __init__(self):
@@ -22,7 +27,6 @@ class FakeUsers:
         self._id_counter = count()
 
     def add(self, user):
-        # self._users[next(self._id_counter)] = user
         user_id = next(self._id_counter)
         self._users[user_id] = user
         return user_id
@@ -43,17 +47,46 @@ class FakeUsers:
 class FakeGoods:
     def __init__(self):
         self._goods = {}
-        # self.number_of_item_created = count()
         self._id_goods = count()
 
     def add(self, good):
         good_id = next(self._id_goods)
         self._goods[good_id] = good
-        numbers_of_item_created = len(self._goods)
-        return numbers_of_item_created
+        return good_id
 
     def get_good_by_id(self, good_id):
         try:
             return self._goods[good_id]
         except KeyError:
-            raise NoSuchUserError(good_id)
+            raise NoSuchGoodError(good_id)
+
+    def update_good_by_id(self, good_id, good):
+        # __import__("pdb").set_trace()
+        if good_id in self._goods:
+            self._goods[good_id] = good
+        else:
+            return f"No such {good}"
+
+
+class FakeStores:
+    def __init__(self):
+        self._store = {}
+        self._id_stores = count()
+
+    def add(self, store):
+        store_id = next(self._id_stores)
+        self._store[store_id] = store
+        return store_id
+
+    def get_store_by_id(self, store_id):
+        try:
+            return self._store[store_id]
+        except KeyError:
+            raise NoSuchStoreError(store_id)
+
+    def update_store_by_id(self, store_id, store):
+        # __import__("pdb").set_trace()
+        if store_id in self._store:
+            self._store[store_id] = store
+        else:
+            return f"No such {store}"

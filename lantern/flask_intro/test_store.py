@@ -53,7 +53,6 @@ class TestUsers(Initializer):
             json={'name': 'Johanna Doe'}
         )
         assert resp.status_code == 200
-        # assert resp.json == {'name': 'Johanna Doe'}
         assert resp.json == {'status': 'success'}
 
     def test_unsuccesful_update(self):
@@ -72,4 +71,72 @@ class TestGoods(Initializer):
             json={'name': 'Chocolate_bar', 'price': 10}
         )
         assert resp.status_code == 200
-        assert resp.json == {'numbers_of_item_created': 1}
+        assert resp.json == {'good_id': 0}
+
+    def test_successful_get_goods(self):
+        resp = self.client.post(
+            '/goods',
+            json={"name": "Water", "price": 10}
+        )
+        # _import__("pdb").set_trace()
+        good_id = resp.json['good_id']
+        resp = self.client.get(f'/goods/{good_id}')
+        assert resp.status_code == 200
+        assert resp.json == {"name": "Water", "price": 10}
+
+    def test_get_unexistent_good(self):
+        resp = self.client.get(f'/goods/1')
+        assert resp.status_code == 404
+        assert resp.json == {'error': 'No such good_id 1'}
+
+    def test_successful_update_good(self):
+        resp = self.client.post(
+            '/goods',
+            json={"name": "Water", "price": 10}
+        )
+        good_id = resp.json['good_id']
+        resp = self.client.put(
+            f'/goods/{good_id}',
+            json={"name": "Water", "price": 15}
+        )
+        assert resp.status_code == 200
+        assert resp.json == {'successfully_updated': 0}
+
+
+class TestStore(Initializer):
+    def test_create_store(self):
+        resp = self.client.post(
+            '/store',
+            json={'name': 'Mad Cow', 'location': 'Lviv', 'manager_id': 2}
+        )
+        assert resp.status_code == 200
+        assert resp.json == {'store_id': 0}
+
+    def test_successful_get_store(self):
+        resp = self.client.post(
+            '/store',
+            json={"name": "Mad Cow", "location": "Lviv", "manager_id": 2}
+        )
+        # _import__("pdb").set_trace()
+        store_id = resp.json['store_id']
+        resp = self.client.get(f'/store/{store_id}')
+        assert resp.status_code == 200
+        assert resp.json == {"name": "Mad Cow", "location": "Lviv", "manager_id": 2}
+
+    def test_get_unexistent_store(self):
+        resp = self.client.get(f'/store/1')
+        assert resp.status_code == 404
+        assert resp.json == {'error': 'No such store_id 1'}
+
+    def test_successful_update_store(self):
+        resp = self.client.post(
+            '/store',
+            json={"name": "Mega Market", "location": "Kyiv", "manager_id": 3}
+        )
+        store_id = resp.json['store_id']
+        resp = self.client.put(
+            f'/store/{store_id}',
+            json={"name": "Big Shop", "location": "Dnipro", "manager_id": 4}
+        )
+        assert resp.status_code == 200
+        assert resp.json == {"successfully_updated": 0}
