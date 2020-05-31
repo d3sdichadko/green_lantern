@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+   web:
+       build: .
+       command: python wsgi.py
+       ports:
+         - "8080:8080"
+       depends_on:
+         - postgres
+       restart: on-failure
+
+   postgres:
+     image: postgres:latest
+     environment:
+       - POSTGRES_USER=cursor
+       - POSTGRES_PASSWORD=very_secret_password
+       - POSTGRES_DB=cursor_sqlalchemy_db
+     expose:
+       - 5432
+     ports:
+       - "5432:5432"
