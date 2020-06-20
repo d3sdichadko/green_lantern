@@ -17,12 +17,12 @@ class User(db.Model, UserMixin):
     orders = db.relationship('Order', backref='user')
     manage_stores = db.relationship('Store', backref='user')
 
-
     def __repr__(self):
         return f"<id: {self.user_id}, name: {self.name}, email: {self.email}>"
 
     def get_id(self):
         return self.user_id
+
 
 class Good(db.Model):
     __tablename__ = "goods"

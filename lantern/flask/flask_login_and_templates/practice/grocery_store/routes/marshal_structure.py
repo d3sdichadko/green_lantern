@@ -12,6 +12,7 @@ goods_structure = {
     "brand": fields.String,
     "price": fields.Integer,
 }
+
 stores_structure = {
     "store_id": fields.Integer,
     "name": fields.String,

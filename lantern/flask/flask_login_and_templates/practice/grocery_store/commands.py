@@ -43,7 +43,6 @@ def get_stores():
     return stores
 
 
-
 class Populate(Command):
     def run(self):
         from grocery_store import app, db

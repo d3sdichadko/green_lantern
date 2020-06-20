@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<html>
+<body>
 <h1 class="title">
-  Flask Login Example
+  Welcome to my Flask Login Example &#128522
 </h1>
 <h2 class="subtitle">
   Easy authentication and authorization in Flask.
 </h2>
+    <img src="{{ url_for('static', filename='grocery_store_img.jpeg') }}" align="center" width="1024" style="border:5px solid greenyellow">
+</body>
+</html>
 {% endblock %}
