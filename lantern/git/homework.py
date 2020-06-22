@@ -15,7 +15,7 @@ def is_two_object_has_same_value(first: Any, second: Any) -> bool:
     If @first and @second has same value should return True
     In another case should return False
     """
-    return first == second
+
 
 
 def is_two_objects_has_same_type(first: Any, second: Any) -> bool:
@@ -98,11 +98,13 @@ def is_word_in_text(word: str, text: str) -> bool:
     return word in text
 
 
+
 def some_loop_exercise() -> list:
     """
     Use loop to create list that contain int values from 0 to 12 except 6 and 7
     """
     return [i for i in range(0, 13) if i != 6 and i != 7]
+
 
 
 def remove_from_list_all_negative_numbers(data: List[int]) -> list:
@@ -116,7 +118,6 @@ def remove_from_list_all_negative_numbers(data: List[int]) -> list:
     """
     return [i for i in data if i > 0]
 
-
 def alphabet() -> dict:
     """
     Create dict which keys are alphabetic characters. And values their number in alphabet
@@ -127,6 +128,7 @@ def alphabet() -> dict:
     """
     from string import ascii_lowercase
     return dict(enumerate(ascii_lowercase, start=1))
+
 
 def simple_sort(data: List[int]) -> List[list]:
     """
