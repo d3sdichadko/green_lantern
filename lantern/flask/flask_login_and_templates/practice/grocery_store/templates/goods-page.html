@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<table class="table table-hover" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+    </tr>
+    {% for good in goods %}
+    <tr>
+        <td>{{good['good_id']}}</td>
+        <td>{{good['name']}}</td>
+        <td>{{good['brand']}}</td>
+        <td>{{good['price']}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}
